@@ -28,55 +28,51 @@ import { clusterApiUrl, Connection } from "@solana/web3.js";
   console.log(
     `Found ${accounts.length} token account(s) for mint ${MY_TOKEN_MINT_ADDRESS}`
   );
-  console.log(accounts[0].pubkey.toBase58());
 
   const tokenAccountInfo = await connection.getParsedAccountInfo(
     accounts[0].pubkey
   );
 
-  console.log((tokenAccountInfo.value?.data).parsed.info);
+  let totalSupply = 0;
+  const data = {};
+  let startTime = new Date();
+  let count = 100;
+  for (var i = 0; i < accounts.length; i++) {
+    if (count === 0) {
+      break;
+    }
 
-  /*
-  // Output (notice the empty <Buffer > at acccount.data)
-  
-  Found 3 token account(s) for mint BUGuuhPsHpk8YZrL2GctsCtXGneL1gmT5zYb7eMHZDWf
-  [
-    {
-      account: {
-        data: <Buffer >,
-        executable: false,
-        lamports: 2039280,
-        owner: [PublicKey],
-        rentEpoch: 228
-      },
-      pubkey: PublicKey {
-        _bn: <BN: a8aca7a3132e74db2ca37bfcd66f4450f4631a5464b62fffbd83c48ef814d8d7>
-      }
-    },
-    {
-      account: {
-        data: <Buffer >,
-        executable: false,
-        lamports: 2039280,
-        owner: [PublicKey],
-        rentEpoch: 228
-      },
-      pubkey: PublicKey {
-        _bn: <BN: ce3b7b906c2ff6c6b62dc4798136ec017611078443918b2fad1cadff3c2e0448>
-      }
-    },
-    {
-      account: {
-        data: <Buffer >,
-        executable: false,
-        lamports: 2039280,
-        owner: [PublicKey],
-        rentEpoch: 228
-      },
-      pubkey: PublicKey {
-        _bn: <BN: d4560e42cb24472b0e1203ff4b0079d6452b19367b701643fa4ac33e0501cb1>
+    const tokenAccountInfo = await connection.getParsedAccountInfo(
+      accounts[i].pubkey
+    );
+
+    const holderData = (tokenAccountInfo.value?.data).parsed.info;
+    if (
+      holderData.owner.toString() ===
+      "2dHGi9wQDqTMLZkgaeyetDzs91MGFDogFHWuTicr2j5a"
+    ) {
+      console.log("Found Tokens ", Number(holderData.tokenAmount.amount));
+    }
+    if (Number(holderData.tokenAmount.amount) > 0) {
+      count--;
+      totalSupply += Number(holderData.tokenAmount.amount);
+      if (holderData.owner in data) {
+        data[holderData.owner] = {
+          amount:
+            Number(data[holderData.owner].amount) +
+            Number(holderData.tokenAmount.amount),
+        };
+      } else {
+        data[holderData.owner] = {
+          amount: Number(holderData.tokenAmount.amount),
+        };
       }
     }
-  ]
-  */
+  }
+
+  console.log("Holder's Data", data);
+  let endTime = new Date();
+  let timeElapsed = endTime - startTime;
+  console.log("totalSupply".toUpperCase(), totalSupply);
+  console.log("TimeElapsed in Seconds", timeElapsed / 1000);
 })();
