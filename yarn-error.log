@@ -1,0 +1,53 @@
+Arguments: 
+  /Users/siddi_404/.nvm/versions/node/v20.5.1/bin/node /opt/homebrew/bin/yarn clean
+
+PATH: 
+  /opt/homebrew/opt/node@16/bin:/Users/siddi_404/.nvm/versions/node/v20.5.1/bin:/opt/homebrew/bin:/opt/homebrew/opt/node@16/bin:/usr/local/bin:/usr/local/sbin:~/bin:/Users/siddi_404/.local/share/solana/install/active_release/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/usr/local/share/dotnet:~/.dotnet/tools:/usr/local/go/bin:/opt/homebrew/opt/node@16/bin:/Users/siddi_404/.nvm/versions/node/v20.5.1/bin:/opt/homebrew/bin:/usr/local/sbin:~/bin:/Users/siddi_404/.local/share/solana/install/active_release/bin:/opt/homebrew/sbin:/Users/siddi_404/.cargo/bin:/Users/siddi_404/go/bin:/Users/siddi_404/go/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  20.5.1
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  SyntaxError: /Users/siddi_404/HyperLaunch/resources/get-holders-data/package.json: Expected double-quoted property name in JSON at position 56
+      at JSON.parse (<anonymous>)
+      at /opt/homebrew/lib/node_modules/yarn/lib/cli.js:1629:59
+      at Generator.next (<anonymous>)
+      at step (/opt/homebrew/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /opt/homebrew/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "get-holders-data",
+    "version": "1.0.0",
+    //"type": "module", // uncomment thsi for js execs
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node",
+      "build": "tsc",
+      "clean": "tsc --build --clean"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@metaplex-foundation/js": "^0.19.4",
+      "@metaplex-foundation/mpl-token-metadata": "^3.0.0",
+      "@solana/spl-token": "^0.3.8",
+      "@solana/web3.js": "^1.78.4",
+      "bs58": "^5.0.0",
+      "dotenv": "^16.3.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
